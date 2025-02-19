@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/Keyfactor/ejbca-ce:
+      branch: main
+      repo: https://github.com/Keyfactor/ejbca-ce.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/Keyfactor/ejbca-ce git:
+        commands:
+        - /usr/bin/env sh .sqa/script.chewy-rose-magpie.sh
+        container: qc.acc_crappy-olive-armadillo
+  QC.Doc:
+    repos:
+      github.com/Keyfactor/ejbca-ce find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sloppy-myrtle-malamute.sh
+        container: qc.doc_geeky-alizarin-mandrill
+      github.com/Keyfactor/ejbca-ce git:
+        commands:
+        - /usr/bin/env sh .sqa/script.gamy-asparagus-cuscus.sh
+        container: qc.doc_randy-bronze-elephant
+      github.com/Keyfactor/ejbca-ce markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-rust-coati.sh
+        container: qc.doc_thirsty-azure-foxhound
+  QC.Lic:
+    repos:
+      github.com/Keyfactor/ejbca-ce licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.cozy-green-tuatara.sh
+        container: qc.lic_hilly-smalt-birman
+  QC.Sty:
+    repos:
+      github.com/Keyfactor/ejbca-ce checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-mustard-bandicoot.sh
+        container: qc.sty_squirrely-tangerine-woodlouse
+      github.com/Keyfactor/ejbca-ce jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.chummy-olive-chihuahua.sh
+        container: qc.sty_gloppy-chartreuse-zebra
+  QC.Ver:
+    repos:
+      github.com/Keyfactor/ejbca-ce get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.boozy-silver-serval.sh
+        container: qc.ver_stealthy-apricot-okapi
+timeout: 5400
